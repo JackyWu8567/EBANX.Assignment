@@ -6,10 +6,11 @@ using System.Text;
 namespace EBANX.Assignment.Core.Repositories
 {
     public interface IPaymentRepository
-    {
-        decimal GetBalance(string accountId);
-        Deposit Deposit(string accountId, decimal amount);
-        Withdraw Withdraw(string accountId, decimal amount);
-        Transfer Transfer(string originAccountId, string destinationAccountId, decimal amount);
+    {        
+        Account GetAccount(string accountId);
+        Account CreateAccount(string accountId, decimal balance);
+        Account UpdateAccount(string accountId, decimal balance);
+        void DeleteAccount(string accountId);
+        List<Account> GetAllAccount();
     }
 }

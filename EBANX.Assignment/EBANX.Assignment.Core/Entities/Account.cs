@@ -4,9 +4,9 @@ using System.Text;
 
 namespace EBANX.Assignment.Core.Entities
 {
-    public class Base
+    public class Account
     {
-        public string Origin { get; set; }
-        public decimal OriginBalance { get; set; }
+        public string AccountId { get; set; }
+        public decimal Balance { get; set; }
     }
 }

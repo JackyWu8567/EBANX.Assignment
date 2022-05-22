@@ -5,9 +5,27 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Domains\**" />
+    <Content Remove="Domains\**" />
+    <EmbeddedResource Remove="Domains\**" />
+    <None Remove="Domains\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\HomeController.cs" />
     <Compile Remove="Controllers\WeatherForecastController.cs" />
-    <Compile Remove="Domains\BalanceManager.cs" />
     <Compile Remove="WeatherForecast.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.8" />
+    <PackageReference Include="Microsoft.OpenApi" Version="1.3.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EBANX.Assignment.Application\EBANX.Assignment.Application.csproj" />
+    <ProjectReference Include="..\EBANX.Assignment.Infrastructure\EBANX.Assignment.Infrastructure.csproj" />
   </ItemGroup>
 
 

@@ -1,5 +1,7 @@
-using EBANX.Assignment.IRepository.Event;
-using EBANX.Assignment.Repository;
+using EBANX.Assignment.Application.Interfaces;
+using EBANX.Assignment.Application.Services;
+using EBANX.Assignment.Core.Repositories;
+using EBANX.Assignment.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,9 +29,21 @@ namespace EBANX.Assignment.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            //services.AddControllers();
+            services.AddControllersWithViews();
 
             services.AddSingleton<IPaymentRepository, PaymentRepository>();
+            services.AddSingleton<IPaymentService, PaymentService>();
+
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v2", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Title = "EBANX Assignment API",
+                    Version = "v2",
+                    Description = "EBANX Assignment API",
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +64,9 @@ namespace EBANX.Assignment.Api
             {
                 endpoints.MapControllers();
             });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(options => options.SwaggerEndpoint("/swagger/v2/swagger.json", "EBANX Assignment API"));
         }
     }
 }

@@ -2,30 +2,60 @@
 using EBANX.Assignment.Core.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace EBANX.Assignment.Infrastructure.Repositories
 {
     public class PaymentRepository : IPaymentRepository
     {
-        public Deposit Deposit(string accountId, decimal amount)
+        private List<Account> accounts;
+        public PaymentRepository()
         {
-            return null;
+            accounts = new List<Account>();
+            accounts.Add(new Account { AccountId = "100", Balance = 20 });
         }
 
-        public decimal GetBalance(string accountId)
+        public Account GetAccount(string accountId)
         {
-            return 0;
+            if (!accounts.Any(a => a.AccountId == accountId))
+            {
+                return null;
+            }
+            return accounts.FirstOrDefault(a => a.AccountId == accountId);
         }
 
-        public Transfer Transfer(string originAccountId, string destinationAccountId, decimal amount)
+        public Account CreateAccount(string accountId, decimal amount)
         {
-            return null;
+            var acount = new Account { AccountId = accountId, Balance = amount };
+            accounts.Add(acount);
+            return acount;
         }
 
-        public Withdraw Withdraw(string accountId, decimal amount)
+        public Account UpdateAccount(string accountId, decimal balance)
         {
-            return null;
+            if (!accounts.Any(a => a.AccountId == accountId))
+            {
+                return null;
+            }
+            var account = accounts.FirstOrDefault(a => a.AccountId == accountId);
+            account.Balance = balance;
+
+            return account;
+        }
+
+        public List<Account> GetAllAccount()
+        {
+            return accounts;
+        }
+
+        public void DeleteAccount(string accountId)
+        {
+            var account = GetAccount(accountId);
+            if(!(account is null))
+            {
+                accounts.Remove(account);
+            }
         }
     }
 }
