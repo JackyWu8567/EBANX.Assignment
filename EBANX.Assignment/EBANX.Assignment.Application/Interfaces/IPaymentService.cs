@@ -12,5 +12,6 @@ namespace EBANX.Assignment.Application.Interfaces
         DepositModel Deposit(string accountId, decimal amount);
         WithdrawModel Withdraw(string accountId, decimal amount);
         TransferModel Transfer(string originAccountId, string destinationAccountId, decimal amount);
+        void Reset();
     }
 }

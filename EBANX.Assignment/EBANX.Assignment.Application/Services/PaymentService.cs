@@ -28,9 +28,8 @@ namespace EBANX.Assignment.Application.Services
             {
                 throw new ArgumentException("Invalid accountId");
             }
-            var balance = account.Balance;
-            _paymentRepository.DeleteAccount(accountId);
-            return balance;
+
+            return account.Balance;
         }
 
         public DepositModel Deposit(string accountId, decimal amount)
@@ -105,6 +104,11 @@ namespace EBANX.Assignment.Application.Services
                 Destination = destinationAccount.AccountId,
                 DestinationBalance = destinationAccount.Balance
             };
+        }
+
+        public void Reset()
+        {
+            _paymentRepository.Reset();
         }
     }
 }

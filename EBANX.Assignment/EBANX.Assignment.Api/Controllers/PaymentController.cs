@@ -12,7 +12,7 @@ using EBANX.Assignment.Api.Dtos;
 namespace EBANX.Assignment.Api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("")]
     public class PaymentController : ControllerBase
     {
         private readonly ILogger<PaymentController> _logger;
@@ -22,6 +22,13 @@ namespace EBANX.Assignment.Api.Controllers
         {
             _paymentService = paymentService;
             _logger = logger;
+        }
+
+        [HttpPost("reset")]
+        public IActionResult Reset()
+        {
+            _paymentService.Reset();
+            return Ok();
         }
 
         [HttpGet("balance")]
@@ -72,7 +79,7 @@ namespace EBANX.Assignment.Api.Controllers
                             }
                     }
                 }
-                return result;
+                return Created(payment.Type, result);
             }
             catch (ArgumentException)
             {

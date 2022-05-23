@@ -13,7 +13,6 @@ namespace EBANX.Assignment.Infrastructure.Repositories
         public PaymentRepository()
         {
             accounts = new List<Account>();
-            accounts.Add(new Account { AccountId = "100", Balance = 20 });
         }
 
         public Account GetAccount(string accountId)
@@ -55,6 +54,14 @@ namespace EBANX.Assignment.Infrastructure.Repositories
             if(!(account is null))
             {
                 accounts.Remove(account);
+            }
+        }
+
+        public void Reset()
+        {
+            if(accounts!=null && accounts.Any())
+            {
+                accounts.Clear();
             }
         }
     }

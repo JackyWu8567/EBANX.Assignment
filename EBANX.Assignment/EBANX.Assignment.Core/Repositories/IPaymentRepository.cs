@@ -12,5 +12,6 @@ namespace EBANX.Assignment.Core.Repositories
         Account UpdateAccount(string accountId, decimal balance);
         void DeleteAccount(string accountId);
         List<Account> GetAllAccount();
+        void Reset();
     }
 }
